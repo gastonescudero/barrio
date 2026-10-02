@@ -1,0 +1,23 @@
+---
+const links = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#que-es', label: '¿Qué es Barrio?' },
+  { href: '#como', label: 'Cómo funciona' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+<header>
+  <a class="logo" href="#inicio"><i></i>Barrio</a>
+  <nav aria-label="Principal">
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  </nav>
+  <a class="btn ghost" href="#contacto">Escribinos por WhatsApp</a>
+</header>
+<style>
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,4vw,48px);position:sticky;top:env(safe-area-inset-top,0px);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);z-index:10}
+  .logo{font-weight:800;font-size:22px;display:flex;align-items:center;gap:8px}
+  .logo i{width:22px;height:22px;border-radius:50% 50% 50% 4px;background:var(--acc);display:inline-block}
+  nav{display:flex;gap:26px;font-size:14px;color:var(--mut)}
+  nav a:hover{color:var(--ink)}
+  @media(max-width:760px){nav{display:none}}
+</style>

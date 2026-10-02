@@ -1,0 +1,64 @@
+---
+const services: [string, string, string][] = [
+  ['Plomería', '#2b6f9e', '#1b3a55'], ['Jardinería', '#4c8a4a', '#24401f'],
+  ['Electricidad', '#d9902b', '#7a4310'], ['Pintura', '#c1503a', '#5a1f18'],
+  ['Limpieza', '#3f9aa3', '#1b4a52'], ['Mecánica', '#6a5aa8', '#2d2557'],
+  ['Carpintería', '#a0713e', '#4a2f14'], ['Climatización', '#4b7fb5', '#1d3556'],
+];
+// Cada fila se duplica para que el desplazamiento sea continuo
+const rowA = [...services, ...services];
+const rowB = [...services.slice(4), ...services.slice(0, 4)];
+const rowB2 = [...rowB, ...rowB];
+---
+<div class="hero" id="inicio">
+  <h1>Encontrá al mejor <span id="word">plomero</span> de tu barrio</h1>
+  <a class="btn" href="#contacto">Escribinos por WhatsApp</a>
+
+  <div class="stage">
+    <div class="row a">
+      {rowA.map(([t, c1, c2]) => <div class="tile" style={`--c1:${c1};--c2:${c2}`}><span>{t}</span></div>)}
+    </div>
+    <div class="row b">
+      {rowB2.map(([t, c1, c2]) => <div class="tile" style={`--c1:${c1};--c2:${c2}`}><span>{t}</span></div>)}
+    </div>
+    <div class="phone" role="img" aria-label="Ejemplo de conversación para pedir un servicio">
+      <div class="ph-top"><b></b>Barrio</div>
+      <div id="chat"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { startHero } from '../scripts/hero';
+  startHero();
+</script>
+
+<style>
+  .hero{text-align:center;padding:48px 16px 0}
+  h1{font-size:clamp(38px,7vw,76px);line-height:1.02;font-weight:800;margin:0 auto 28px;max-width:14em;letter-spacing:-.03em}
+  #word{display:inline-block;color:var(--acc);min-width:1ch;border-bottom:4px solid var(--acc)}
+  .stage{position:relative;margin-top:48px;padding:10px 0 20px}
+  .row{display:flex;gap:14px;width:max-content;margin-bottom:14px}
+  .row.a{animation:l 60s linear infinite}
+  .row.b{animation:r 70s linear infinite}
+  @keyframes l{to{transform:translateX(-50%)}}
+  @keyframes r{from{transform:translateX(-50%)}to{transform:none}}
+  .tile{width:170px;height:150px;border-radius:18px;flex:none;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:600;font-size:14px}
+  .tile::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,var(--c1),var(--c2))}
+  .tile span{position:relative;background:rgba(0,0,0,.35);padding:3px 10px;border-radius:99px}
+  .phone{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(300px,82vw);background:var(--card);border:1px solid var(--line);border-radius:34px;padding:16px 14px 18px;box-shadow:0 30px 80px rgba(20,30,40,.28);z-index:2;text-align:left}
+  .ph-top{text-align:center;font-weight:800;font-size:13px;margin-bottom:10px}
+  .ph-top b{display:block;width:34px;height:34px;border-radius:50%;background:var(--acc);margin:0 auto 4px}
+  #chat{display:flex;flex-direction:column;gap:8px;min-height:250px;font-size:13px}
+  /* Elementos creados desde JS */
+  #chat :global(.m){max-width:82%;padding:9px 13px;border-radius:18px;background:var(--bub);animation:pop .3s ease both}
+  #chat :global(.m.me){align-self:flex-end;background:var(--bubme);color:var(--bubme-t)}
+  #chat :global(.dots){align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:var(--bub);border-radius:18px}
+  #chat :global(.dots i){width:6px;height:6px;border-radius:50%;background:var(--mut);animation:b 1s infinite}
+  #chat :global(.dots i:nth-child(2)){animation-delay:.15s}
+  #chat :global(.dots i:nth-child(3)){animation-delay:.3s}
+  @keyframes b{50%{transform:translateY(-4px)}}
+  @keyframes pop{from{opacity:0;transform:scale(.92)}}
+  @media(max-width:760px){.tile{width:130px;height:120px}.phone{top:46%}.stage{height:480px;overflow:hidden;padding-bottom:0}}
+  @media(prefers-reduced-motion:reduce){.row{animation:none!important}#chat :global(.m),#chat :global(.dots i){animation:none}}
+</style>

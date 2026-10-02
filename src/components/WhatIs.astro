@@ -1,0 +1,32 @@
+---
+const cards = [
+  { icon: '📍', title: 'Mercado local', text: 'Un puente entre quienes necesitan ayuda y quienes saben hacerlo, a pocas cuadras.' },
+  { icon: '🛡️', title: 'Ayuda verificada', text: 'Cada profesional pasa por una revisión de identidad, referencias y calidad de trabajo.' },
+  { icon: '💬', title: 'Todo en un chat', text: 'Pedí, coordiná y pagá desde una sola conversación, sin instalar nada.' },
+  { icon: '🕒', title: 'Horarios flexibles', text: 'Los estudiantes ganan dinero con tiempos que se adaptan a su cursada.' },
+];
+---
+<section id="que-es">
+  <div class="head">
+    <h2>¿Qué es Barrio?</h2>
+    <p>Barrio conecta a vecinos con estudiantes y oficios de la zona para resolver arreglos del hogar sin vueltas.</p>
+  </div>
+  <div class="grid">
+    {cards.map((c) => (
+      <article class="card">
+        <div class="ic">{c.icon}</div>
+        <h3>{c.title}</h3>
+        <p>{c.text}</p>
+      </article>
+    ))}
+  </div>
+</section>
+<style>
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px}
+  .card:nth-child(2){border-radius:20px 20px 20px 4px}
+  .ic{width:42px;height:42px;border-radius:12px;background:color-mix(in srgb,var(--acc2) 16%,transparent);display:grid;place-items:center;font-size:20px;margin-bottom:46px}
+  h3{margin:0 0 6px;font-size:18px}
+  p{margin:0;color:var(--mut);font-size:15px}
+  @media(max-width:760px){.ic{margin-bottom:24px}}
+</style>

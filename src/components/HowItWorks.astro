@@ -1,0 +1,25 @@
+---
+const steps = [
+  { title: 'Contanos qué necesitás', text: 'Describí el problema y la zona en un mensaje.' },
+  { title: 'Elegí a tu profesional', text: 'Recibís opciones verificadas con precio y horario.' },
+  { title: 'Pagá cuando está listo', text: 'Confirmás el trabajo y cerrás el pago desde el chat.' },
+];
+---
+<section id="como">
+  <div class="head">
+    <h2>Cómo funciona</h2>
+    <p>Tres pasos, desde el mensaje hasta el trabajo terminado.</p>
+  </div>
+  <div class="steps">
+    {steps.map((s, i) => (
+      <div class="step"><b>{i + 1}</b><h3>{s.title}</h3><p>{s.text}</p></div>
+    ))}
+  </div>
+</section>
+<style>
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border-top:2px solid var(--ink)}
+  .step{padding:20px 20px 10px 0}
+  b{font-size:13px;color:var(--acc)}
+  h3{margin:4px 0}
+  p{color:var(--mut);margin:0}
+</style>
